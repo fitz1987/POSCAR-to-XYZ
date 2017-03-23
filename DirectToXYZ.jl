@@ -17,6 +17,42 @@ println("What is the scaling factor? Enter a Float64")
 Factor=parse(Float64, readline())
 println("Factor=", Factor)
 
+#get the number of atoms and their ordering in the coordinate list
+#println("how many atom types are there?")
+#number_atom_types=readline()
+#println(number_atoms_types
+#for i in 1:number_atom_types
+# println("what is the first species?")
+# atoms[i]=readline()
+# println("how many of it are there?")
+# number_atoms[i]=readline()
+#end
+
+#println("there are:", number_atom_types "types of atoms")
+#println("with" )
+#AtomList=readline()
+#println("AtomList=", AtomList)
+#q=AtomList[2]
+#for i in 1:q
+# println(AtomList[1])
+#end
+
+#for i in 1:AtomList[4]
+#  println(AtomList[3])
+#end
+
+#for i in 1:AtomList[6]
+#  println(AtomList[5])
+#end 
+
+#for i in 1:AtomList[8
+#  println(AtomList[7])
+#end
+
+# get the atomlist file into an array
+AtomList=readdlm("atomlist")
+#println(AtomList)
+
 # set the Lattice Vectors a, b, and c. Each is a 1x3 vector.
 # having components e.g. ax, ay, az.
 
@@ -70,8 +106,15 @@ FinalX=UnscaleX(Factor, XList, a)
 FinalY=UnscaleY(Factor, YList, b)
 FinalY=UnscaleZ(Factor, ZList, c)
 
-println("FinalX:", FinalX)
-println("FinalY:", FinalY)
-println("FinalZ", FinalZ)
-writedlm("coords.txt", [FinalX FinalY FinalZ], '\t')
+n=size(YList, 1)
+
+CommentString="c"
+writedlm("coords.xyz", n)
+writedlm("coords.xyz", CommentString)
+#open("./coords.xyz", "w") 
+#  write(n\n)
+#  write("commentline")
+#  end
+ println("Summary of memory usage and time to write coords.xyz file:") 
+ @time(writedlm("coords.txt", [AtomList FinalX FinalY FinalZ], '\t'))
 #
