@@ -1,0 +1,16 @@
+"""
+Contents of the lattice-vectors file:  
+1st line: lattice vector a   
+2nd line: lattice vector b  
+3rd line: lattice vector c  
+
+"""
+
+Contents of direct-list:
+fractional coordinates of atoms in this order: 
+24 C  
+6 H  
+18 O  
+6 Mg  
+
+"""
