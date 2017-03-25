@@ -10,8 +10,11 @@
 # Factor = the scaling factor for the fractional coordinates
 # OUTPUT: file coords.txt containing standard cartesian coordinates
 
+# find out how long the POSCAR file is
+run(pipeline(`awk 'END{print NR}' POSCAR`, stdout="temp.txt"))
+file_length=readdlm("temp.txt")
+println("the length of the poscar file is: ", file_length)
 # type info: All numbers in this script are Float64. 
-
 # get the scaling factor for the fractional/direct coordinates. 
 println("What is the scaling factor? Enter a Float64")
 Factor=parse(Float64, readline())
@@ -66,9 +69,11 @@ println("b=", b)
 println("c=", c)
 
 DirectList=readdlm("direct-list")
-XList=DirectList[1:54,1]
-YList=DirectList[1:54,2]
-ZList=DirectList[1:54, 3]
+
+n=size(DirectList,1)
+XList=DirectList[1:n,1]
+YList=DirectList[1:n,2]
+ZList=DirectList[1:n, 3]
 
 
 function UnscaleX(Factor::Float64, XList::Array{Float64}, a::Array{Float64})
@@ -106,15 +111,16 @@ FinalX=UnscaleX(Factor, XList, a)
 FinalY=UnscaleY(Factor, YList, b)
 FinalY=UnscaleZ(Factor, ZList, c)
 
+# Format results and save to an XYZ file 
 n=size(YList, 1)
+println("Enter the text (< 80 chars) for the comment line of the xyz file:")
+CommentLine=readline()
+write("commentline.txt", "$CommentLine")
+writedlm("natom.txt", n)
+writedlm("coords.txt", [AtomList FinalX FinalY FinalZ], '\t')
+println("coordinates have been converted to XYZ format and saved in coords.xyz.") 
+run(pipeline(`cat natom.txt commentline.txt coords.txt`, stdout="coords.xyz"))
 
-CommentString="c"
-writedlm("coords.xyz", n)
-writedlm("coords.xyz", CommentString)
-#open("./coords.xyz", "w") 
-#  write(n\n)
-#  write("commentline")
-#  end
- println("Summary of memory usage and time to write coords.xyz file:") 
- @time(writedlm("coords.txt", [AtomList FinalX FinalY FinalZ], '\t'))
+# clean up temp .txt files before exiting 
+run(`\rm natom.txt commentline.txt coords.txt`)
 #
