@@ -1,6 +1,6 @@
 #!/bin/csh
 
-# 23 mar 17: process a POSCAR file from VASP into the format
+# 23 mar 17: digest a POSCAR file from VASP into the format
 #            that the julia script understands
 
 if (null$1 == null) then
