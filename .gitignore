@@ -2,6 +2,7 @@ POSCAR
 lattice-vectors
 direct-list
 atomlist
+a-*
 *swp
 *txt
 *xyz
