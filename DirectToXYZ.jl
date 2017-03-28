@@ -10,47 +10,11 @@
 # Factor = the scaling factor for the fractional coordinates
 # OUTPUT: file coords.txt containing standard cartesian coordinates
 
-# find out how long the POSCAR file is
-run(pipeline(`awk 'END{print NR}' POSCAR`, stdout="temp.txt"))
-file_length=readdlm("temp.txt")
-println("the length of the poscar file is: ", file_length)
 # type info: All numbers in this script are Float64. 
 # get the scaling factor for the fractional/direct coordinates. 
 println("What is the scaling factor? Enter a Float64")
 Factor=parse(Float64, readline())
 println("Factor=", Factor)
-
-#get the number of atoms and their ordering in the coordinate list
-#println("how many atom types are there?")
-#number_atom_types=readline()
-#println(number_atoms_types
-#for i in 1:number_atom_types
-# println("what is the first species?")
-# atoms[i]=readline()
-# println("how many of it are there?")
-# number_atoms[i]=readline()
-#end
-
-#println("there are:", number_atom_types "types of atoms")
-#println("with" )
-#AtomList=readline()
-#println("AtomList=", AtomList)
-#q=AtomList[2]
-#for i in 1:q
-# println(AtomList[1])
-#end
-
-#for i in 1:AtomList[4]
-#  println(AtomList[3])
-#end
-
-#for i in 1:AtomList[6]
-#  println(AtomList[5])
-#end 
-
-#for i in 1:AtomList[8
-#  println(AtomList[7])
-#end
 
 # get the atomlist file into an array
 AtomList=readdlm("atomlist")
@@ -73,7 +37,7 @@ DirectList=readdlm("direct-list")
 n=size(DirectList,1)
 XList=DirectList[1:n,1]
 YList=DirectList[1:n,2]
-ZList=DirectList[1:n, 3]
+ZList=DirectList[1:n,3]
 
 
 function UnscaleX(Factor::Float64, XList::Array{Float64}, a::Array{Float64})
@@ -98,7 +62,7 @@ function UnscaleZ(Factor::Float64, ZList::Array{Float64}, c::Array{Float64})
  CarteZ=zeros(ZList)
  n=size(ZList,1)
  for i in 1:n
-  CarteZ[i]=CartesianZList=Factor*(ZList[i]*c[1] + ZList[i]*c[2] + ZList[i]*c[3])
+  CarteZ[i]=Factor*(ZList[i]*c[1] + ZList[i]*c[2] + ZList[i]*c[3])
  end
  return CarteZ
 end 
@@ -114,6 +78,7 @@ FinalY=UnscaleZ(Factor, ZList, c)
 # Format results and save to an XYZ file 
 n=size(YList, 1)
 println("Enter the text (< 80 chars) for the comment line of the xyz file:")
+println("This is commonly the empirical formula of the system, or something descriptive")
 CommentLine=readline()
 write("commentline.txt", "$CommentLine")
 writedlm("natom.txt", n)
