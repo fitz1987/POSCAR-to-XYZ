@@ -4,7 +4,8 @@
 # into standard cartesian coordinates
 
 
-# INPUT: files: lattice-vectors and direct-list & it will ask you for the value of Factor
+# INPUT: files: lattice-vectors, direct-list, atomlist 
+#               & it will ask you for the value of Factor
 # Files: lattice-vectors contains lattice vectors, a 3x3 list of their xyz components
 #        direct-list is a nx3 list of direct coordinates
 # Factor = the scaling factor for the fractional coordinates
@@ -18,7 +19,6 @@ println("Factor=", Factor)
 
 # get the atomlist file into an array
 AtomList=readdlm("atomlist")
-#println(AtomList)
 
 # set the Lattice Vectors a, b, and c. Each is a 1x3 vector.
 # having components e.g. ax, ay, az.
@@ -38,7 +38,9 @@ n=size(DirectList,1)
 XList=DirectList[1:n,1]
 YList=DirectList[1:n,2]
 ZList=DirectList[1:n,3]
-
+#debug purposes
+#println(ZList)
+# z coords look fine at this point.
 
 function UnscaleX(Factor::Float64, XList::Array{Float64}, a::Array{Float64})
  CarteX=zeros(XList)
@@ -88,4 +90,7 @@ run(pipeline(`cat natom.txt commentline.txt coords.txt`, stdout="coords.xyz"))
 
 # clean up temp .txt files before exiting 
 run(`\rm natom.txt commentline.txt coords.txt`)
+# uncomment this second one out when its ready for production runs 
+# bc this script should clean up after itself and after a-listgen
+#run(`\rm lattice-vectors direct-list atomlist`)
 #
