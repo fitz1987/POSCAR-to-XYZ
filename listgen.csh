@@ -76,8 +76,6 @@ if (null$5 != null) then
  end 
 endif 
 
-# cat line for debug; check that temp was generated correctly
-cat temp
 # rename temp so that it has the name DirectToXYZ.jl expects it to have
 mv temp atomlist
 
