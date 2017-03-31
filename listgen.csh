@@ -40,10 +40,7 @@ endif
 
 # get the list of atom types and how many of each
 set howmany=`awk 'NR==6' $file`
-#foo=$(echo ${'ARRAY[*]}'
 echo ${howmany[*]}
-set number_of_atom_types=`$(echo ${howmany[*]})`
-echo $number_of_atom_types '=number of atom types'
 echo $howmany[1] 
 
 # print the atom names for 1st and 2nd atom types to temp file
