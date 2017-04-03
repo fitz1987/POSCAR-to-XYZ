@@ -71,7 +71,7 @@ end
 
 function UnscaleZ(Factor::Float64, XList::Array{Float64}, YList::Array{Float64}, ZList::Array{Float64}, a::Array{Float64}, b::Array{Float64}, c::Array{Float64})
  CarteZ=zeros(ZList)
- n=size(Zlist,1)
+ n=size(ZList,1)
  for i in 1:n
   CarteZ[i]=Factor*(XList[i]*a[3] + YList[i]*b[3] + ZList[i]*c[3])
  end
