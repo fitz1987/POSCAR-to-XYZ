@@ -38,33 +38,42 @@ n=size(DirectList,1)
 XList=DirectList[1:n,1]
 YList=DirectList[1:n,2]
 ZList=DirectList[1:n,3]
-#debug purposes
-#println(ZList)
-# z coords look fine at this point.
 
-function UnscaleX(Factor::Float64, XList::Array{Float64}, a::Array{Float64})
+# this is the old version of the functions. they were all identical except 
+# for interchanging the name of the coordinate.
+#function UnscaleX(Factor::Float64, XList::Array{Float64}, a::Array{Float64})
+# CarteX=zeros(XList)
+# n=size(XList,1)
+# for i in 1:n
+#  CarteX[i]= Factor*(XList[i]*a[1] + XList[i]*a[2] + XList[i]*a[3])
+# end
+# CarteX
+#end
+
+function UnscaleX(Factor::Float64, XList::Array{Float64}, YList::Array{Float64}, ZList::Array{Float64}, a::Array{Float64}, b::Array{Float64}, c::Array{Float64})
  CarteX=zeros(XList)
- n=size(XList,1)
+ n=size(XList, 1)
  for i in 1:n
-  CarteX[i]= Factor*(XList[i]*a[1] + XList[i]*a[2] + XList[i]*a[3])
+   CarteX[i]=Factor*(XList[i]*a[1] + YList[i]*b[1] + ZList[i]*c[1])
  end
  CarteX
 end
 
-function UnscaleY(Factor::Float64, YList::Array{Float64}, b::Array{Float64})
+
+function UnscaleY(Factor::Float64, XList::Array{Float64}, YList::Array{Float64}, ZList::Array{Float64}, a::Array{Float64}, b::Array{Float64}, c::Array{Float64})
  CarteY=zeros(YList)
- n=size(YList,1)
+ n=size(YList, 1)
  for i in 1:n
-  CarteY[i]=Factor*(YList[i]*b[1] + YList[i]*b[2] + YList[i]*b[3])
+  CarteY[i]=Factor*(XList[i]*a[2] + YList[i]*b[2] + ZList[i]*c[2])
  end
  CarteY
-end
+end 
 
-function UnscaleZ(Factor::Float64, ZList::Array{Float64}, c::Array{Float64})
+function UnscaleZ(Factor::Float64, XList::Array{Float64}, YList::Array{Float64}, ZList::Array{Float64}, a::Array{Float64}, b::Array{Float64}, c::Array{Float64})
  CarteZ=zeros(ZList)
- n=size(ZList,1)
+ n=size(Zlist,1)
  for i in 1:n
-  CarteZ[i]=Factor*(ZList[i]*c[1] + ZList[i]*c[2] + ZList[i]*c[3])
+  CarteZ[i]=Factor*(XList[i]*a[3] + YList[i]*b[3] + ZList[i]*c[3])
  end
  CarteZ
 end
@@ -85,10 +94,10 @@ CommentLine=readline()
 write("commentline.txt", "$CommentLine")
 writedlm("natom.txt", n)
 writedlm("coords.txt", [AtomList FinalX FinalY FinalZ], '\t')
-println("coordinates have been converted to XYZ format and saved in coords.xyz.")
-run(pipeline(`cat natom.txt commentline.txt coords.txt`, stdout="coords.xyz"))
+println("coordinates have been converted to XYZ format and saved in coords2.xyz.")
+run(pipeline(`cat natom.txt commentline.txt coords.txt`, stdout="coords2.xyz"))
 
-# clean up temp .txt files before exiting
+# clean up temp and .txt files before exiting
   run(`\rm natom.txt commentline.txt coords.txt`)
-  run(`\rm lattice-vectors direct-list atomlist`)
+# run(`\rm lattice-vectors direct-list atomlist`)
 #
