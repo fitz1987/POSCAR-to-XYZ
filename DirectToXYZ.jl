@@ -82,9 +82,9 @@ FinalX=zeros(XList)
 FinalY=zeros(YList)
 FinalZ=zeros(ZList)
 
-FinalX=UnscaleX(Factor, XList, a)
-FinalY=UnscaleY(Factor, YList, b)
-FinalZ=UnscaleZ(Factor, ZList, c)
+FinalX=UnscaleX(Factor, XList, YList, ZList, a, b, c)
+FinalY=UnscaleY(Factor, XList, YList, ZList, a, b, c)
+FinalZ=UnscaleZ(Factor, XList, YList, ZList, a, b, c)
 
 # Format results and save to an XYZ file
 n=size(YList, 1)
