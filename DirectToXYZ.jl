@@ -1,17 +1,18 @@
-# DirectToXYZ.jl
-# this script converts a matrix of direct, fractional coordinates
-# such as you might find in a POSCAR (VASP) file
-# into standard cartesian coordinates
+#= DirectToXYZ.jl
+this script converts a matrix of direct, fractional coordinates
+such as you might find in a POSCAR (VASP) file
+ into standard cartesian coordinates
 
 
-# INPUT: files: lattice-vectors, direct-list, atomlist
-#               & it will ask you for the value of Factor
-# Files: lattice-vectors contains lattice vectors, a 3x3 list of their xyz components
-#        direct-list is a nx3 list of direct coordinates
-# Factor = the scaling factor for the fractional coordinates
-# OUTPUT: file coords.txt containing standard cartesian coordinates
+ INPUT: files: lattice-vectors, direct-list, atomlist
+               & it will ask you for the value of Factor
+ Files: lattice-vectors contains lattice vectors, a 3x3 list of their xyz components
+        direct-list is a nx3 list of direct coordinates
+ Factor = the scaling factor for the fractional coordinates
+ OUTPUT: file coords.txt containing standard cartesian coordinates
 
-# type info: All numbers in this script are Float64.
+ type info: All numbers are Float64.
+=#
 # get the scaling factor for the fractional/direct coordinates.
 println("What is the scaling factor? Enter a Float64")
 Factor=parse(Float64, readline())
