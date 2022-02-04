@@ -1,6 +1,9 @@
 ## About 
 The scripts in this repo will take coordinates in POSCAR format (repeating units of a crystal lattice) and convert them to XYZ format (cartesian coordinates), which is more commonly used in input to _ab initio_ chemistry software. If you are looking for a straightforward and automated way to convert these coordinates, this repo will solve your problem.
 
+## Dependencies
+- written in Julia and csh; uses no other libraries. 
+
 ## Getting Started
 Clone this repo using the green 'Clone or download' button at the top.
 Then, (from the command line)
@@ -15,6 +18,15 @@ $ listgen.csh POSCAR C H O
 
 Next step: 
 julia DirectToXYZ.jl
+
+ INPUT: files: lattice-vectors, direct-list, atomlist
+               & it will ask you for the value of Factor
+ Temporary files: lattice-vectors contains lattice vectors, a 3x3 list of their xyz components
+        direct-list is a nx3 list of direct coordinates
+ Factor = the scaling factor for the fractional coordinates
+ OUTPUT: file coords.txt containing standard cartesian coordinates
+ type info: All numbers are Float64.
+
  This script will ask you for the scaling factor. It will warn you that it's expecting a Float64 as an answer. I've limited the types of the numbers used in this script to Float64. This avoids possible type instability and increases efficiency.  
 
  This script will then ask you for a comment, < 80 characters. This will become the comment line of the output file, which will be called coords.xyz  
