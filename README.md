@@ -1,4 +1,4 @@
-## Contents: 
+## Files in this repository: 
 * listgen.csh : a csh script that digests a VASP POSCAR file into a format the next script will like  
 *  DirectToXYZ.jl : a Julia script to convert fractional/direct coordinates to the standard chemistry XYZ format (see wikipedia on XYZ coordinates for info on this)  
 
