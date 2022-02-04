@@ -6,10 +6,26 @@ The scripts in this repo will take coordinates in POSCAR format (repeating units
 
 ## Getting Started
 Clone this repo using the green 'Clone or download' button at the top.
+
+### Usage: 
+Use the scripts in this order: 
+1) listgen.csh
+2) 2) julia DirectToXYZ.jl
+
+Usage for listgen.csh: 
+
 Then, (from the command line)
 $ listgen.csh  
 
- When run with no arguments, this script explains how it should be used.
+ When run with no arguments, this script will echo the folloing instruction to the terminal explaining how it should be used: 
+$ a-listgen file Atom_1_Name Atom_2_Name Atom_3_Name Atom_4_Name' 
+...where file is a POSCAR formatted file from VASP'
+...Two atom names are required. The 3rd and 4th are optional.'
+...this script chops up a POSCAR file into a format'
+...that is convenient for DirectToXYZ.jl.'
+...DirectToXYZ.jl will convert the fractional or direct coordinates'
+...into standard cartesian format and save them to an .xyz file.'
+...the usual workflow is to run this script followed by DirectToXYZ.jl'
 
 Example:
 $ listgen.csh POSCAR C H O   
