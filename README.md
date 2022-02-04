@@ -1,3 +1,5 @@
+## About 
+The scripts in this repo will take coordinates in POSCAR format (repeating units of a crystal lattice) and convert them to XYZ format (cartesian coordinates), which is more commonly used in input to _ab initio_ chemistry software. If you are looking for a straightforward and automated way to convert these coordinates, this repo will solve your problem.
 
 ## Getting Started
 Clone this repo using the green 'Clone or download' button at the top.
